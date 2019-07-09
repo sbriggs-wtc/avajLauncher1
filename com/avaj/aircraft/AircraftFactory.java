@@ -1,14 +1,19 @@
 package com.avaj.aircraft;
-/* 
-import java.io.*;
 
-public class AircraftFactory {
-    public Flyable newAircraft(String type, String name, int longitude, int latitude, int height) {
+public class AircraftFactory{
+    public static Flyable newAircraft(String type, String name, int longitude, int latitude, int height) {
+        Coordinates coordinates = new Coordinates(longitude, latitude, height);
 
-        coordinates = new Coordinates(longitude, latitude, height);
-
-        return()
+        switch(type){
+            case "Helicopter":
+                return (new Helicopter(name, coordinates));
+            case "JetPlane":
+                return (new JetPlane(name, coordinates));
+            case "Baloon":
+                return (new Baloon(name, coordinates));
+            default:
+                return null;
+        }
     }
 }
 
- */

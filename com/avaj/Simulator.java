@@ -5,37 +5,42 @@ import com.avaj.aircraft.*;
 import java.io.*;
 
 public class Simulator {
-    private static WeatherTower weatherTower;
+    private static WeatherTower wt;
     private static String line;
     private static int simCount;
-    public static void main(String[] args) throws InterruptedException {
-        try (   BufferedReader buffIn  = new BufferedReader(new FileReader(args[0]))) {
+    public static void main(String[] args) throws InterruptedException{
+        try (BufferedReader buffIn  = new BufferedReader(new FileReader(args[0]))){
             if ((line = buffIn.readLine()) != null) {
                 simCount = Integer.parseInt(line.split(" ")[0]);
                 System.out.println(simCount);
             }
-            if (simCount <= 0) {
+            if (simCount <= 0){
                 System.out.println("Invalid simulation count");
                 System.exit(1);
             }
-            weatherTower = new WeatherTower();
-            aircraftFactory = new AircraftFactory();
-            while((line = buffIn.readLine()) != null) {
-                create ac;
-                register ac;
-                
-                System.out.println((line.split(" ")[0]));
-                System.out.println((line.split(" ")[1]));
-                System.out.println((line.split(" ")[2]));
-                System.out.println((line.split(" ")[3]));
+            wt = new WeatherTower();
+            while((line = buffIn.readLine()) != null){
+                Flyable ac = AircraftFactory.newAircraft(   
+                    line.split(" ")[0],
+                    line.split(" ")[1],
+                    Integer.parseInt(line.split(" ")[2]),
+                    Integer.parseInt(line.split(" ")[3]),
+                    Integer.parseInt(line.split(" ")[4]));
+                wt.register(ac);
             }
+            for(int i = 0; i < simCount; i++){
+                wt.changeWeather();
+            }
+            wt.dumpObservers();
         } catch(IOException e) {    
             System.err.println("IOE / FNFE: " + e);
         } catch(IndexOutOfBoundsException e) { 
             System.err.println("IOOBE / AIOOBE: Please provide one argument " + e);
         } catch(NumberFormatException nfe) {
             System.err.println("NFE: First line should be an integer " + nfe);
-        } finally {
+        } catch(NullPointerException e){
+            e.printStackTrace();
+        }finally {
             System.out.println("Done, yay!");
         }
     }
