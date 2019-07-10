@@ -1,6 +1,8 @@
 package com.avaj.aircraft;
 
-public class Aircraft{
+
+
+public abstract class Aircraft{
     private static long idCounter;
     protected long id;
     protected String name;

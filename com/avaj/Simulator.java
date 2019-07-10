@@ -28,10 +28,16 @@ public class Simulator {
                     Integer.parseInt(line.split(" ")[4]));
                 wt.register(ac);
             }
-            for(int i = 0; i < simCount; i++){
-                wt.changeWeather();
-            }
+
+            // for(int i = 0; i < simCount; i++){
+            //     wt.changeWeather();
+            // }
             wt.dumpObservers();
+
+/*             Coordinates myCoordinates = new Coordinates(1, 2, 3);
+            String s1 = wt.getWeather(myCoordinates);
+            System.out.println(s1); */
+
         } catch(IOException e) {    
             System.err.println("IOE / FNFE: " + e);
         } catch(IndexOutOfBoundsException e) { 

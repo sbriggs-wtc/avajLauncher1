@@ -4,7 +4,6 @@ public class Coordinates{
     private int latitude;
     private int longitude;
     private int height;
-    
     Coordinates(int latitude, int longitude, int height){
         setLatitude(latitude);
         setLongitude(longitude);
