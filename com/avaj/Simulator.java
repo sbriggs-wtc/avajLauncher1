@@ -27,12 +27,13 @@ public class Simulator {
                     Integer.parseInt(line.split(" ")[3]),
                     Integer.parseInt(line.split(" ")[4]));
                 wt.register(ac);
+                ac.registerTower(wt);
             }
 
-            // for(int i = 0; i < simCount; i++){
-            //     wt.changeWeather();
-            // }
-            wt.dumpObservers();
+            for(int i = 0; i < simCount; i++){
+                wt.changeWeather();
+            }
+            //wt.dumpObservers();
 
 /*             Coordinates myCoordinates = new Coordinates(1, 2, 3);
             String s1 = wt.getWeather(myCoordinates);

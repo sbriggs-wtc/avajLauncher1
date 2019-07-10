@@ -13,13 +13,26 @@ public abstract class Tower{
 
     }
     protected void conditionsChanged(){
-        //update all aircraft coordinates and display their unique messages
+        for(int i = 0; i < observers.size(); i++){
+            Flyable ac = observers.get(i);
+            ac.updateConditions();
+        }
     }
     //Vardump for testing
     public void dumpObservers(){
         for(int i = 0; i < observers.size(); i++){
+            String type = observers.get(i).getType();
+            String name = observers.get(i).getName();
+/*          
+            String longitude;
+            String latitude;
+            String height;
+*/
+            System.out.println(type + " " + name);
+/*          
             System.out.print(observers.get(i).getType() + "#");
             System.out.println(observers.get(i).getName() + "(" + (i + 1) + ")");
+*/
         }
     }
 }
