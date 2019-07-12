@@ -24,4 +24,7 @@ public class Baloon extends Aircraft implements Flyable{
     public String getType(){
         return("Baloon");
     }
+    public long getId(){
+        return this.id;
+    }
 }

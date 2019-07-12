@@ -23,12 +23,13 @@ public abstract class Tower{
         for(int i = 0; i < observers.size(); i++){
             String type = observers.get(i).getType();
             String name = observers.get(i).getName();
+            String id = Long.toString(observers.get(i).getId());
 /*          
             String longitude;
             String latitude;
             String height;
 */
-            System.out.println(type + " " + name);
+            System.out.println(type + " " + name + "(" + id + ")");
 /*          
             System.out.print(observers.get(i).getType() + "#");
             System.out.println(observers.get(i).getName() + "(" + (i + 1) + ")");

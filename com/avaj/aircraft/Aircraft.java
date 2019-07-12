@@ -1,18 +1,20 @@
 package com.avaj.aircraft;
 
-
-
 public abstract class Aircraft{
-    private static long idCounter;
+    private static long idCounter = 1;
     protected long id;
     protected String name;
     protected Coordinates coordinates;
     protected Aircraft(String name, Coordinates coordinates){
         setName(name);
         setCoordinates(coordinates);
+        setId(nextId());
     }
     private long nextId(){
-        return(0);
+        return(idCounter++);
+    }
+    public void setId(long nextId){
+        this.id = nextId;
     }
     public void setName(String name){
         this.name = name;

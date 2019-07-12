@@ -11,8 +11,7 @@ public class Simulator {
     public static void main(String[] args) throws InterruptedException{
         try (BufferedReader buffIn  = new BufferedReader(new FileReader(args[0]))){
             if ((line = buffIn.readLine()) != null) {
-                simCount = Integer.parseInt(line.split(" ")[0]);
-                System.out.println(simCount);
+                simCount = Integer.parseInt(line.split(" ")[0]); //try catch NFE
             }
             if (simCount <= 0){
                 System.out.println("Invalid simulation count");
@@ -33,7 +32,7 @@ public class Simulator {
             for(int i = 0; i < simCount; i++){
                 wt.changeWeather();
             }
-            //wt.dumpObservers();
+            wt.dumpObservers();
 
 /*             Coordinates myCoordinates = new Coordinates(1, 2, 3);
             String s1 = wt.getWeather(myCoordinates);

@@ -24,4 +24,7 @@ public class JetPlane extends Aircraft implements Flyable{
     public String getType(){
         return("JetPlane");
     }
+    public long getId(){
+        return this.id;
+    }
 }
