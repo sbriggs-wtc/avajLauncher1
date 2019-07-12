@@ -11,7 +11,7 @@ public class Baloon extends Aircraft implements Flyable{
     public void updateConditions(){
         switch (this.weatherTower.getWeather(this.coordinates)){
             case "SUN":
-                coordinateDeltas(0, 2, 4); //latitude, longitude, height
+                coordinateDeltas(0, 2, /* -100 */4); //latitude, longitude, height
                 logWeatherMessage("I'm a baloon, its sunny.");
                 break;
             case "RAIN":
@@ -34,15 +34,16 @@ public class Baloon extends Aircraft implements Flyable{
             this.coordinates.setHeight(100);
         if (this.coordinates.getHeight() < 0){
             this.coordinates.setHeight(0);
-            //deregister aircraft from tower
-            //deregister tower from aircraft
-            //log landed message
+            logWeatherMessage("landing.");
+            this.weatherTower.unregister(this);
+            this.weatherTower = null;
         }
     }
     @Override
     public void registerTower(WeatherTower weatherTower){
         this.weatherTower = weatherTower;
     }
+    @Override
     public void setType(){
         this.type = "Baloon";
     }

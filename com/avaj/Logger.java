@@ -1,11 +1,8 @@
 package com.avaj;
 
-// import java.io.*;
+import java.io.*;
 
 public final class Logger{
-    //private String outputFile;
-    //private FileWriter fileWriter;
-    //private PrintWriter printWriter;
     private static Logger logger = null;
     Logger(){}
     public static Logger getLogger(){
@@ -13,21 +10,16 @@ public final class Logger{
             logger = new Logger();
         return logger;
     }
-    
-/*     public void setOutputFile(String outputFile){
-        this.outputFile = outputFile;
-    } */
-    public void logMessage(String message){
+    public static void logMessage(String message){
 
         System.out.println(message);
-    /*  try{
-            this.printWriter = new PrintWriter(new FileWriter(outputFile));
-            printWriter.println(message);
-
+        try{
+            BufferedWriter buffOut = new BufferedWriter(new FileWriter("simulation.txt"));
+            buffOut.write(message);
+            buffOut.write('\n');
+            buffOut.close();
         } catch (IOException e) {
                System.out.println("ioe in logger" + e);
-        } finally {
-            printWriter.close();
-        } */
+        }
     }
 }

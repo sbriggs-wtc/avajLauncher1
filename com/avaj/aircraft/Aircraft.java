@@ -13,7 +13,7 @@ public abstract class Aircraft{
         setName(name);
         setCoordinates(coordinates);
         setId(nextId());
-        setType(); //override in inheriting classes
+        setType();
         setMessagePrefix(getType()+"#"+getName()+"("+getId()+")");
     }
     private long nextId(){
@@ -43,7 +43,7 @@ public abstract class Aircraft{
             this.coordinates.setHeight(this.coordinates.getHeight() + z);
     }
     public void logCoordinates(Coordinates coordinates){
-        Logger.getLogger().logMessage("Coordinates: "+
+        Logger./* getLogger(). */logMessage("Coordinates: "+
             Integer.toString(this.coordinates.getLongitude())+" "+
             Integer.toString(this.coordinates.getLatitude())+" "+
             Integer.toString(this.coordinates.getHeight())); 
@@ -57,7 +57,7 @@ public abstract class Aircraft{
     public void setType(){
     }
     public void logWeatherMessage(String message){
-        Logger.getLogger().logMessage(messagePrefix+": "+message);
+        Logger./* getLogger(). */logMessage(getMessagePrefix()+": "+message);
     }
     public long getId(){
         return this.id;
