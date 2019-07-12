@@ -1,4 +1,5 @@
 package com.avaj.weather;
+import com.avaj.Logger;
 import com.avaj.aircraft.*;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ public abstract class Tower{
     private List<Flyable> observers = new ArrayList<Flyable>();
     public void register(Flyable flyable){
         observers.add(flyable);
+        Logger.getLogger().logMessage("Tower says ");
     }
     public void unregister(Flyable flyable){
 

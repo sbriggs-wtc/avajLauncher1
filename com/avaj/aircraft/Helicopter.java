@@ -7,28 +7,32 @@ public class Helicopter extends Aircraft implements Flyable{
     private WeatherTower weatherTower;
     Helicopter(String name, Coordinates coordinates){
         super(name, coordinates);
+        setType("Helicopter");
+        setMessagePrefix(getType()+" "+getName()+"("+getId()+"): ");
     }
     @Override
     public void updateConditions(){
         switch (this.weatherTower.getWeather(this.coordinates)){
             case "SUN":
+                logCoordinates(this.coordinates);
                 coordinateDeltas(5, 10, 0); //latitude, longitude, height
-                logWeatherMessage("Its sunny yay!");
+                logCoordinates(this.coordinates);
+                logWeatherMessage("I'm a helicopter, its sunny.");
                 break;
             case "RAIN":
                 coordinateDeltas(0, 5, 0);
-                logWeatherMessage("Its raining yay!");
+                logWeatherMessage("I'm a helicopter, its raining.");
                 break;
             case "FOG":
                 coordinateDeltas(0, 1, 0);
-                logWeatherMessage("Its foggy yay!");
+                logWeatherMessage("I'm a helicopter, its foggy.");
                 break;
             case "SNOW":
                 coordinateDeltas(5, 10, 0);
-                logWeatherMessage("Its snowing yay!");
+                logWeatherMessage("I'm a helicopter, its snowing.");
                 break;
             default:
-            logWeatherMessage("Weather tower unresponsive yay!");
+            logWeatherMessage("I'm a helicopter, ... weather tower unresponsive");
                 break;
         }
         if (this.coordinates.getHeight() > 100)
@@ -43,27 +47,13 @@ public class Helicopter extends Aircraft implements Flyable{
     public void registerTower(WeatherTower weatherTower){
         this.weatherTower = weatherTower;
     }
-    public String getType(){
-        return "Helicopter";
-    }
     public long getId(){
         return this.id;
     }
-    public void coordinateDeltas(int x, int y, int z){
-        this.coordinates.setLatitude(this.coordinates.getLatitude() + x);
-        this.coordinates.setLongitude(this.coordinates.getLongitude() + y);
-        this.coordinates.setHeight(this.coordinates.getHeight() + z);
-    }
-    public void logCoordinates(Coordinates coordinates){
-        Logger.getLogger().logMessage("Coordinates: "+
-                    Integer.toString(this.coordinates.getLongitude())+" "+
-                    Integer.toString(this.coordinates.getLatitude())+" "+
-                    Integer.toString(this.coordinates.getHeight())); 
-    }
     public void logWeatherMessage(String message){
-        String type = getType();
-        String name = getName();
-        String id = Long.toString(getId());
-        Logger.getLogger().logMessage(type+" "+name+"("+id+"): "+message);
+        Logger.getLogger().logMessage(messagePrefix + message);
+    }
+    public void setMessagePrefix(String messagePrefix){
+        this.messagePrefix = messagePrefix;
     }
 }

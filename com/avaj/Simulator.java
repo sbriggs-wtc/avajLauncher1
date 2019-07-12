@@ -28,16 +28,13 @@ public class Simulator {
                 wt.register(ac);
                 ac.registerTower(wt);
             }
-
             for(int i = 0; i < simCount; i++){
                 wt.changeWeather();
             }
-            wt.dumpObservers();
-
+            //wt.dumpObservers();
 /*             Coordinates myCoordinates = new Coordinates(1, 2, 3);
             String s1 = wt.getWeather(myCoordinates);
             System.out.println(s1); */
-
         } catch(IOException e) {    
             System.err.println("IOE / FNFE: " + e);
         } catch(IndexOutOfBoundsException e) { 

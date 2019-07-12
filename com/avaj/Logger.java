@@ -3,7 +3,6 @@ package com.avaj;
 //import java.io.*;
 
 public final class Logger{
-
     //private String outputFile;
     //private FileWriter fileWriter;
     //private PrintWriter printWriter;
@@ -20,8 +19,7 @@ public final class Logger{
     public void logMessage(String message){
 
         System.out.println(message);
-/*         try{
-            
+    /*  try{
             this.printWriter = new PrintWriter(new FileWriter(outputFile));
             printWriter.println(message);
 
