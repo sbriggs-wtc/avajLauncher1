@@ -1,14 +1,11 @@
 package com.avaj.aircraft;
 
 import com.avaj.weather.*;
-import com.avaj.Logger;
 
 public class Baloon extends Aircraft implements Flyable{
     private WeatherTower weatherTower;
     Baloon(String name, Coordinates coordinates){
         super(name, coordinates);
-        setType("Baloon");
-        setMessagePrefix(getType()+" "+getName()+"("+getId()+"): ");
     }
     @Override
     public void updateConditions(){
@@ -46,13 +43,7 @@ public class Baloon extends Aircraft implements Flyable{
     public void registerTower(WeatherTower weatherTower){
         this.weatherTower = weatherTower;
     }
-    public long getId(){
-        return this.id;
-    }
-    public void logWeatherMessage(String message){
-        Logger.getLogger().logMessage(messagePrefix + message);
-    }
-    public void setMessagePrefix(String messagePrefix){
-        this.messagePrefix = messagePrefix;
+    public void setType(){
+        this.type = "Baloon";
     }
 }

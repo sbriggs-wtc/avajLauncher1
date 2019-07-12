@@ -1,22 +1,16 @@
 package com.avaj.aircraft;
-
-import com.avaj.Logger;
 import com.avaj.weather.WeatherTower;
 
 public class Helicopter extends Aircraft implements Flyable{
     private WeatherTower weatherTower;
     Helicopter(String name, Coordinates coordinates){
         super(name, coordinates);
-        setType("Helicopter");
-        setMessagePrefix(getType()+" "+getName()+"("+getId()+"): ");
     }
     @Override
     public void updateConditions(){
         switch (this.weatherTower.getWeather(this.coordinates)){
             case "SUN":
-                logCoordinates(this.coordinates);
                 coordinateDeltas(5, 10, 0); //latitude, longitude, height
-                logCoordinates(this.coordinates);
                 logWeatherMessage("I'm a helicopter, its sunny.");
                 break;
             case "RAIN":
@@ -47,13 +41,8 @@ public class Helicopter extends Aircraft implements Flyable{
     public void registerTower(WeatherTower weatherTower){
         this.weatherTower = weatherTower;
     }
-    public long getId(){
-        return this.id;
-    }
-    public void logWeatherMessage(String message){
-        Logger.getLogger().logMessage(messagePrefix + message);
-    }
-    public void setMessagePrefix(String messagePrefix){
-        this.messagePrefix = messagePrefix;
+    @Override
+    public void setType(){
+        this.type = "Helicopter";
     }
 }

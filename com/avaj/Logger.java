@@ -1,6 +1,6 @@
 package com.avaj;
 
-//import java.io.*;
+// import java.io.*;
 
 public final class Logger{
     //private String outputFile;
@@ -13,6 +13,7 @@ public final class Logger{
             logger = new Logger();
         return logger;
     }
+    
 /*     public void setOutputFile(String outputFile){
         this.outputFile = outputFile;
     } */

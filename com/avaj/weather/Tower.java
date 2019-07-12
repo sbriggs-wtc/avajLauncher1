@@ -9,7 +9,7 @@ public abstract class Tower{
     private List<Flyable> observers = new ArrayList<Flyable>();
     public void register(Flyable flyable){
         observers.add(flyable);
-        Logger.getLogger().logMessage("Tower says ");
+        Logger.getLogger().logMessage("Tower says: "+flyable.getMessagePrefix()+"registered to weather tower.");
     }
     public void unregister(Flyable flyable){
 
@@ -26,16 +26,7 @@ public abstract class Tower{
             String type = observers.get(i).getType();
             String name = observers.get(i).getName();
             String id = Long.toString(observers.get(i).getId());
-/*          
-            String longitude;
-            String latitude;
-            String height;
-*/
             System.out.println(type + " " + name + "(" + id + ")");
-/*          
-            System.out.print(observers.get(i).getType() + "#");
-            System.out.println(observers.get(i).getName() + "(" + (i + 1) + ")");
-*/
         }
     }
 }

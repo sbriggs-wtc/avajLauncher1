@@ -10,5 +10,6 @@ public interface Flyable{
     public Coordinates getCoordinates();
     public long getId();
     public void logWeatherMessage(String message);
+    public String getMessagePrefix();
     //public void setType();
 }
