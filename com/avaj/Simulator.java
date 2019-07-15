@@ -10,13 +10,11 @@ public class Simulator {
     private static int simCount;
     public static void main(String[] args) throws InterruptedException{
         try (BufferedReader buffIn  = new BufferedReader(new FileReader(args[0]))){
-            if ((line = buffIn.readLine()) != null) {
-                simCount = Integer.parseInt(line.split(" ")[0]); //try catch NFE
-            }
-            if (simCount <= 0){
-                System.out.println("Invalid simulation count");
-                System.exit(1);
-            }
+            if ((line = buffIn.readLine()) == null) 
+                throw new FileFormatException("The first line of the scenario file could not be read.");
+            simCount = Integer.parseInt(line.split(" ")[0]); //throws NumberFormatException
+            if (simCount <= 0) 
+                throw new FileFormatException("The simulation count is invalid.");
             wt = new WeatherTower();
             while((line = buffIn.readLine()) != null){
                 Flyable ac = AircraftFactory.newAircraft(   
@@ -35,15 +33,17 @@ public class Simulator {
 /*             Coordinates myCoordinates = new Coordinates(1, 2, 3);
             String s1 = wt.getWeather(myCoordinates);
             System.out.println(s1); */
-        } catch(IOException e) {    
-            System.err.println("IOE / FNFE: " + e);
-        } catch(IndexOutOfBoundsException e) { 
-            System.err.println("IOOBE / AIOOBE: Please provide one argument " + e);
-        } catch(NumberFormatException nfe) {
+        }catch(NumberFormatException nfe){
             System.err.println("NFE: First line should be an integer " + nfe);
-        } catch(NullPointerException e){
+        }catch(FileFormatException e){    
+            System.err.println("Custom FileFormatException: " + e);
+        }catch(IOException e){    
+            System.err.println("IOE / FNFE: " + e);
+        }catch(IndexOutOfBoundsException e){ 
+            System.err.println("IOOBE / AIOOBE: Please provide one argument " + e);
+        }catch(NullPointerException e){
             e.printStackTrace();
-        }finally {
+        }finally{
             System.out.println("Done, yay!");
         }
     }
