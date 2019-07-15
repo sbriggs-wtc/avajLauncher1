@@ -3,40 +3,37 @@ package com.avaj;
 import com.avaj.weather.*;
 import com.avaj.aircraft.*;
 import java.io.*;
-import java.util.*;
 
 public class Simulator {
-    private static WeatherTower wt;
     private static String line;
     private static int simCount;
     public static void main(String[] args) throws InterruptedException{
         try (BufferedReader buffIn  = new BufferedReader(new FileReader(args[0]))){
-            if ((line = buffIn.readLine()) == null) 
+            if((line = buffIn.readLine()) == null) 
                 throw new FileFormatException("The scenario file could not be read.");
             if(!isNumber(line.split(" ")[0]))
-                throw new FileFormatException("The simulation count has the wrong format.");
-            simCount = Integer.parseInt(line.split(" ")[0]);
-            if (simCount <= 0) 
+                throw new FileFormatException("The scenario file is in the wrong format.");
+            if((simCount = Integer.parseInt(line.split(" ")[0])) <= 0)
                 throw new FileFormatException("The simulation count is invalid.");
-            wt = new WeatherTower();
+            WeatherTower weatherTower = new WeatherTower();
             while((line = buffIn.readLine()) != null){
-                Flyable ac = AircraftFactory.newAircraft(   
+                Flyable flyable = AircraftFactory.newAircraft(   
                     line.split(" ")[0],
                     line.split(" ")[1],
                     Integer.parseInt(line.split(" ")[2]),
                     Integer.parseInt(line.split(" ")[3]),
                     Integer.parseInt(line.split(" ")[4]));
-                wt.register(ac);
-                ac.registerTower(wt);
+                weatherTower.register(flyable);
+                flyable.registerTower(weatherTower);
             }
             for(int i = 0; i < simCount; i++)
-                wt.changeWeather();
+                weatherTower.changeWeather();
         }catch(NumberFormatException e){
             System.err.println("NFE" + e.getMessage());
         }catch(FileFormatException e){    
-            System.err.println(e.getMessage());
+            System.err.println("FFE" + e.getMessage());
         }catch(Md5Exception e){
-            System.err.print(e.getMessage());
+            System.err.print("MD5E" + e.getMessage());
         }catch(IOException e){    
             System.err.println("IOE" + e.getMessage());
         }catch(IndexOutOfBoundsException e){ 
@@ -46,7 +43,13 @@ public class Simulator {
         }finally{
             System.out.println("Done, yay!");
         }
-        //interrupted exception
+    }
+    public static boolean isNumber(String string){
+        for (int i = 0; i < string.length(); i++){
+            if(!Character.isDigit(string.charAt(i)))
+                return false;
+        }
+        return true;
     }
 }
 
