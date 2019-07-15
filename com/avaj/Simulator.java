@@ -1,8 +1,9 @@
-package com.avaj; //keep the run, source and scenario files out of the package
+package com.avaj;
 
 import com.avaj.weather.*;
 import com.avaj.aircraft.*;
 import java.io.*;
+import java.util.*;
 
 public class Simulator {
     private static WeatherTower wt;
@@ -11,8 +12,10 @@ public class Simulator {
     public static void main(String[] args) throws InterruptedException{
         try (BufferedReader buffIn  = new BufferedReader(new FileReader(args[0]))){
             if ((line = buffIn.readLine()) == null) 
-                throw new FileFormatException("The first line of the scenario file could not be read.");
-            simCount = Integer.parseInt(line.split(" ")[0]); //throws NumberFormatException
+                throw new FileFormatException("The scenario file could not be read.");
+            if(!isNumber(line.split(" ")[0]))
+                throw new FileFormatException("The simulation count has the wrong format.");
+            simCount = Integer.parseInt(line.split(" ")[0]);
             if (simCount <= 0) 
                 throw new FileFormatException("The simulation count is invalid.");
             wt = new WeatherTower();
@@ -26,26 +29,24 @@ public class Simulator {
                 wt.register(ac);
                 ac.registerTower(wt);
             }
-            for(int i = 0; i < simCount; i++){
+            for(int i = 0; i < simCount; i++)
                 wt.changeWeather();
-            }
-            //wt.dumpObservers();
-/*             Coordinates myCoordinates = new Coordinates(1, 2, 3);
-            String s1 = wt.getWeather(myCoordinates);
-            System.out.println(s1); */
-        }catch(NumberFormatException nfe){
-            System.err.println("NFE: First line should be an integer " + nfe);
+        }catch(NumberFormatException e){
+            System.err.println("NFE" + e.getMessage());
         }catch(FileFormatException e){    
-            System.err.println("Custom FileFormatException: " + e);
+            System.err.println(e.getMessage());
+        }catch(Md5Exception e){
+            System.err.print(e.getMessage());
         }catch(IOException e){    
-            System.err.println("IOE / FNFE: " + e);
+            System.err.println("IOE" + e.getMessage());
         }catch(IndexOutOfBoundsException e){ 
-            System.err.println("IOOBE / AIOOBE: Please provide one argument " + e);
+            System.err.println("IOOB" + e.getMessage());
         }catch(NullPointerException e){
-            e.printStackTrace();
+            System.err.println("NPE" + e.getMessage());
         }finally{
             System.out.println("Done, yay!");
         }
+        //interrupted exception
     }
 }
 
@@ -54,3 +55,10 @@ public class Simulator {
 //readline() will throw an IOE
 //Will also catch ArrayIndexOutOfBoundsException
 //integer.parseint() will throw number format exception
+//simCount = Integer.parseInt(line.split(" ")[0]); throws NumberFormatException
+//keep the run, source and scenario files out of the package
+
+            //wt.dumpObservers();
+/*             Coordinates myCoordinates = new Coordinates(1, 2, 3);
+            String s1 = wt.getWeather(myCoordinates);
+            System.out.println(s1); */
