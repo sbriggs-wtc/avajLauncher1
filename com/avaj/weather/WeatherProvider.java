@@ -1,7 +1,6 @@
 package com.avaj.weather;
 
 import com.avaj.aircraft.*;
-//import java.io.*;
 import java.util.Random;
 
 public class WeatherProvider{

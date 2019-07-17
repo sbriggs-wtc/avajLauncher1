@@ -29,7 +29,7 @@ public final class Md5Parser{
             case "994736b4f0aec72f6e5ae580051d012f":
                 return "Baloon";
             default:
-                throw new Md5Exception("Error: MD5 string could not be decrypted.");
+                throw new Md5Exception("MD5 string could not be decrypted.");
         }
     }
 }

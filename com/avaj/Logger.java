@@ -1,32 +1,31 @@
 package com.avaj;
 
 import java.io.*;
+import java.util.ArrayList;
 
-public final class Logger{ //Final classes cannot be extended
+public class Logger {
+    public static ArrayList<String> messages = new ArrayList<>();
     private static Logger logger = null;
-    private static BufferedWriter buffOut = null;
     Logger(){}
     public static Logger getLogger(){
         if (logger == null)
             logger = new Logger();
         return logger;
     }
-    public static void setWriter() throws IOException{
-        buffOut = new BufferedWriter(new FileWriter("simulation.txt"));
-    }
-    public static BufferedWriter getWriter(){
-        return(buffOut);
-    }
     public void logMessage(String message){
-/*         try{
-            if (buffOut == null)
-                setWriter();
-            buffOut.write(message);
+        messages.add(message);
+    }
+    public void logMessagesToFile(){
+        BufferedWriter buffOut;
+        try{
+            buffOut = new BufferedWriter(new FileWriter("simulation.txt"));
+            for(String s : messages){
+                buffOut.write(s + '\n');
+                buffOut.flush();
+            }
+            buffOut.close();
         }catch(IOException e){
             e.printStackTrace();
-            System.out.println("IOE thrown in logMessage");
-        } */
-        System.out.println(message);
-
+        }
     }
 }

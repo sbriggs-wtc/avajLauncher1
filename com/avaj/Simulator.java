@@ -28,20 +28,19 @@ public class Simulator {
             }
             for(int i = 0; i < simCount; i++)
                 weatherTower.changeWeather();
+            Logger.getLogger().logMessagesToFile();
         }catch(NumberFormatException e){
-            System.err.println("NFE" + e.getMessage());
+            System.err.println(e.getMessage());
         }catch(FileFormatException e){    
-            System.err.println("FFE" + e.getMessage());
+            System.err.println(e.getMessage());
         }catch(Md5Exception e){
-            System.err.print("MD5E" + e.getMessage());
+            System.err.print(e.getMessage());
         }catch(IOException e){    
-            System.err.println("IOE" + e.getMessage());
+            System.err.println(e.getMessage());
         }catch(IndexOutOfBoundsException e){ 
-            System.err.println("IOOB" + e.getMessage());
+            System.err.println("Please provide a scenario file");
         }catch(NullPointerException e){
-            System.err.println("NPE" + e.getMessage());
-        }finally{
-            System.out.println("Done, yay!");
+            System.err.println(e.getMessage());
         }
     }
     public static boolean isNumber(String string){

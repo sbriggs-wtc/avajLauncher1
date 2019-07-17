@@ -3,7 +3,7 @@ import com.avaj.Logger;
 import com.avaj.aircraft.*;
 
 import java.util.ArrayList;
-import java.util.List; //imports the List<> interface
+import java.util.List;
 
 public abstract class Tower{
     private List<Flyable> observers = new ArrayList<Flyable>();
@@ -19,15 +19,6 @@ public abstract class Tower{
         for(int i = 0; i < observers.size(); i++){
             Flyable ac = observers.get(i);
             ac.updateConditions();
-        }
-    }
-    //Vardump for testing
-    public void dumpObservers(){
-        for(int i = 0; i < observers.size(); i++){
-            String type = observers.get(i).getType();
-            String name = observers.get(i).getName();
-            String id = Long.toString(observers.get(i).getId());
-            System.out.println(type + " " + name + "(" + id + ")");
         }
     }
 }
