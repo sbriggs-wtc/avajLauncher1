@@ -10,7 +10,7 @@ public class Helicopter extends Aircraft implements Flyable{
     public void updateConditions(){
         switch (this.weatherTower.getWeather(this.coordinates)){
             case "SUN":
-                coordinateDeltas(0, 10, 2); //latitude, longitude, height
+                coordinateDeltas(0, 10, 2);
                 logWeatherMessage("I'm a helicopter, its sunny.");
                 break;
             case "RAIN":

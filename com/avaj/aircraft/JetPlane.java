@@ -11,7 +11,7 @@ public class JetPlane extends Aircraft implements Flyable{
     public void updateConditions(){
         switch (this.weatherTower.getWeather(this.coordinates)){
             case "SUN":
-                coordinateDeltas(10, 0, 2); //latitude, longitude, height
+                coordinateDeltas(10, 0, 2);
                 logWeatherMessage("I'm a jet, its sunny.");
                 break;
             case "RAIN":

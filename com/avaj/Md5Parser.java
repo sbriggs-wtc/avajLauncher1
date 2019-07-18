@@ -1,6 +1,5 @@
 package com.avaj;
 
-
 public final class Md5Parser{
     private static Md5Parser md5Parser = null;
     private Md5Parser(){}

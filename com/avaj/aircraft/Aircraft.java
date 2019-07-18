@@ -34,7 +34,7 @@ public abstract class Aircraft{
     public Coordinates getCoordinates(){
         return(this.coordinates);
     }
-    public void coordinateDeltas(int x, int y, int z){
+    public void coordinateDeltas(int x, int y, int z){ //latitude, longitude, height
         if (x != 0)
             this.coordinates.setLatitude(this.coordinates.getLatitude() + x);
         if (y != 0)

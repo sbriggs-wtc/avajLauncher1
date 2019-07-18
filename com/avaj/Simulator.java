@@ -51,16 +51,3 @@ public class Simulator {
         return true;
     }
 }
-
-//Will also catch FileNotFoundException
-//FileReader() will throw an FNFE
-//readline() will throw an IOE
-//Will also catch ArrayIndexOutOfBoundsException
-//integer.parseint() will throw number format exception
-//simCount = Integer.parseInt(line.split(" ")[0]); throws NumberFormatException
-//keep the run, source and scenario files out of the package
-
-            //wt.dumpObservers();
-/*             Coordinates myCoordinates = new Coordinates(1, 2, 3);
-            String s1 = wt.getWeather(myCoordinates);
-            System.out.println(s1); */
